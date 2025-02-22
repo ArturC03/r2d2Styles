@@ -55,13 +55,3 @@ func PrintDebug(message string) {
 
 	fmt.Println(debugStyle.Render("[DEBUG] " + message))
 }
-
-// Example usage
-func main() {
-	PrintTagMessage("info", "Starting semantic analysis...")
-	PrintSemanticError(12, 5, "Undefined variable 'x'")
-	PrintCodeGenInfo("Parsing", "Analyzing AST structure")
-	PrintCodeGenInfo("Generating", "Creating intermediate representation")
-	PrintSuccess("Code generation completed!")
-	PrintDebug("Checking variable scope for optimizations")
-}
