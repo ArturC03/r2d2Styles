@@ -1,57 +1,18 @@
 package r2d2Styles
 
-import (
-	"fmt"
-	"github.com/charmbracelet/lipgloss"
-)
+import "fmt"
 
-// Print tag and message together
-func PrintTagMessage(tagType, message string) {
-	switch tagType {
-	case "error":
-		fmt.Println(errorStyle.Render("ERROR") + " " + message)
-	case "info":
-		fmt.Println(infoStyle.Render("INFO") + " " + message)
-	case "warning":
-		fmt.Println(warningStyle.Render("WARNING") + " " + message)
-	default:
-		fmt.Println(message) // Default plain text
-	}
+// Function to generate an info message
+func InfoMessage(message string) string {
+	return fmt.Sprintf("%s %s", Tag("info"), message)
 }
 
-// Print semantic error with line & column info
-func PrintSemanticError(line, column int, message string) {
-	errorMsg := fmt.Sprintf("Line %d, Column %d: %s", line, column, message)
-	fmt.Println(errorStyle.Render("SEMANTIC ERROR") + " " + errorMsg)
+// Function to generate a warning message
+func WarningMessage(message string) string {
+	return fmt.Sprintf("%s %s", Tag("warning"), message)
 }
 
-// Print a message during code generation
-func PrintCodeGenInfo(phase, message string) {
-	phaseStyle := lipgloss.NewStyle().
-		Bold(true).
-		Background(lipgloss.Color("#008080")). // Teal for codegen phases
-		Foreground(lipgloss.Color("#ffffff")).
-		Padding(0, 1)
-
-	fmt.Println(phaseStyle.Render(phase) + " " + message)
-}
-
-// Print success message
-func PrintSuccess(message string) {
-	successStyle := lipgloss.NewStyle().
-		Bold(true).
-		Background(lipgloss.Color("#43BF6D")). // Green success
-		Foreground(lipgloss.Color("#ffffff")).
-		Padding(0, 1)
-
-	fmt.Println(successStyle.Render("SUCCESS") + " " + message)
-}
-
-// Print debug messages
-func PrintDebug(message string) {
-	debugStyle := lipgloss.NewStyle().
-		Italic(true).
-		Foreground(lipgloss.Color("#6E6E6E")) // Grey debug messages
-
-	fmt.Println(debugStyle.Render("[DEBUG] " + message))
+// Function to generate an error message
+func ErrorMessage(message string) string {
+	return fmt.Sprintf("%s %s", Tag("error"), message)
 }
