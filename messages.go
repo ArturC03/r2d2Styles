@@ -1,4 +1,4 @@
-package main
+package r2d2Styles
 
 import (
 	"fmt"
