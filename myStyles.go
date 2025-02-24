@@ -8,19 +8,19 @@ var (
 			Bold(true).
 			Background(lipgloss.Color("#FF4F5A")).
 			Foreground(lipgloss.Color("#FFFFFF")).
-			Padding(0, 2)
+			Padding(0, 1)
 
 	infoStyle = lipgloss.NewStyle().
 			Bold(true).
 			Background(lipgloss.Color("#4C6EF5")).
 			Foreground(lipgloss.Color("#FFFFFF")).
-			Padding(0, 2)
+			Padding(0, 1)
 
 	warningStyle = lipgloss.NewStyle().
 			Bold(true).
 			Background(lipgloss.Color("#FFB92D")).
 			Foreground(lipgloss.Color("#000000")).
-			Padding(0, 2)
+			Padding(0, 1)
 )
 
 // Colors
