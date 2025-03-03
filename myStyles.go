@@ -19,7 +19,7 @@ var (
 	warningStyle = lipgloss.NewStyle().
 			Bold(true).
 			Background(lipgloss.Color("#FFB92D")).
-			Foreground(lipgloss.Color("#000000")).
+			Foreground(lipgloss.Color("#FFFFFF")).
 			Padding(0, 1)
 )
 
