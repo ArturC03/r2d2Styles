@@ -16,3 +16,6 @@ func WarningMessage(message string) string {
 func ErrorMessage(message string) string {
 	return fmt.Sprintf("%s %s", Tag("error"), message)
 }
+func SuccessMessage(message string) string {
+	return fmt.Sprintf("%s %s", Tag("success"), message)
+}

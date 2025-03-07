@@ -21,6 +21,12 @@ var (
 			Background(lipgloss.Color("#FFB92D")).
 			Foreground(lipgloss.Color("#FFFFFF")).
 			Padding(0, 1)
+
+	successStyle = lipgloss.NewStyle().
+			Bold(true).
+			Background(lipgloss.Color("#28A745")). // Verde forte para sucesso
+			Foreground(lipgloss.Color("#FFFFFF")).
+			Padding(0, 1)
 )
 
 // Colors
@@ -33,6 +39,7 @@ var (
 	info       = lipgloss.AdaptiveColor{Light: "#4C6EF5", Dark: "#3A5BDF"} // Clean blue
 	accent     = lipgloss.AdaptiveColor{Light: "#FF5733", Dark: "#FF6B6B"} // Vibrant orange
 	background = lipgloss.AdaptiveColor{Light: "#F0F4F8", Dark: "#2E2E2E"} // Soft light and dark background
+	success    = lipgloss.AdaptiveColor{Light: "#28A745", Dark: "#218838"} // Verde adaptável
 )
 
 // Help menu styles
@@ -81,6 +88,8 @@ func Tag(tagType string) string {
 		return infoStyle.Render("INFO")
 	case "warning":
 		return warningStyle.Render("WARNING")
+	case "success":
+		return successStyle.Render("SUCCESS")
 	default:
 		return ""
 	}
