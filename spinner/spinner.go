@@ -6,18 +6,18 @@ import (
 )
 
 type Model struct {
-	spinner spinner.Model
-	done    bool
+	Model spinner.Model
+	done  bool
 }
 
 func New() Model {
 	return Model{
-		spinner: spinner.New(),
+		Model: spinner.New(),
 	}
 }
 
 func (m Model) Init() tea.Cmd {
-	return tea.Batch(m.spinner.Tick)
+	return tea.Batch(m.Model.Tick)
 }
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -28,7 +28,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 	case spinner.TickMsg:
 		var cmd tea.Cmd
-		m.spinner, cmd = m.spinner.Update(msg)
+		m.Model, cmd = m.Model.Update(msg)
 		return m, cmd
 	}
 	return m, nil
@@ -38,7 +38,7 @@ func (m Model) View() string {
 	if m.done {
 		return "Compilation complete!"
 	}
-	return m.spinner.View() + " Compiling..."
+	return m.Model.View() + " Compiling..."
 }
 
 func (m *Model) SetDone(done bool) {
@@ -46,5 +46,9 @@ func (m *Model) SetDone(done bool) {
 }
 
 func (m *Model) Start() tea.Cmd {
-	return m.spinner.Tick
+	return m.Model.Tick
+}
+
+func (m *Model) SetSpinnerType(s spinner.Spinner) {
+	m.Model.Spinner = s
 }
