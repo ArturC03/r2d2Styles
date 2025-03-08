@@ -14,7 +14,7 @@ type Model struct {
 // Função para criar um novo spinner
 func New() Model {
 	return Model{
-		Spinner: spinner.New(spinner.Dot), // Definindo o tipo de spinner como 'Dot'
+		Spinner: spinner.New(spinner.WithSpinner(spinner.Dot)), // Usando WithSpinner como opção
 	}
 }
 
