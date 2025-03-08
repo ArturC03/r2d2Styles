@@ -4,13 +4,12 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/charmbracelet/bubbles/progress"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
 type model struct {
-	progress progress.Model
-	done     bool
+	progress int
+	quit     chan struct{}
 }
 
 func (m model) Init() tea.Cmd {
@@ -18,32 +17,35 @@ func (m model) Init() tea.Cmd {
 }
 
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg := msg.(type) {
-	case tea.KeyMsg:
-		if msg.String() == "q" {
-			return m, tea.Quit
-		}
+	select {
+	case <-m.quit:
+		return m, tea.Quit
+	default:
+	}
 
+	switch msg.(type) {
 	case tickMsg:
-		if m.done {
+		if m.progress >= 100 {
 			return m, tea.Quit
 		}
-		cmd := m.progress.IncrPercent(0.05)
-		if m.progress.Percent() >= 1.0 {
-			m.done = true
-			return m, tea.Quit
-		}
-		return m, tea.Batch(cmd, tick())
+		m.progress += 2
+		return m, tick()
 	}
 
 	return m, nil
 }
 
 func (m model) View() string {
-	if m.done {
-		return "Compilação concluída!\n"
+	bar := "["
+	for i := 0; i < 50; i++ {
+		if i < m.progress/2 {
+			bar += "="
+		} else {
+			bar += " "
+		}
 	}
-	return fmt.Sprintf("Compilando...\n%s", m.progress.View())
+	bar += fmt.Sprintf("] %d%%", m.progress)
+	return bar
 }
 
 type tickMsg struct{}
@@ -54,10 +56,22 @@ func tick() tea.Cmd {
 	})
 }
 
+var p *tea.Program
+
 // Start inicia a barra de progresso
 func Start() {
-	p := tea.NewProgram(model{progress: progress.New(progress.WithDefaultGradient())})
-	if err := p.Start(); err != nil {
-		fmt.Println("Erro ao iniciar a barra de progresso:", err)
+	p = tea.NewProgram(model{quit: make(chan struct{})})
+	go func() {
+		if _, err := p.Run(); err != nil {
+			fmt.Println("Erro ao iniciar a barra de progresso:", err)
+		}
+	}()
+}
+
+// Stop finaliza a barra de progresso
+func Stop() {
+	if p != nil {
+		close(p.Model().(model).quit)
+		p.Quit()
 	}
 }
