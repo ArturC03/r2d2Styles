@@ -56,11 +56,15 @@ func tick() tea.Cmd {
 	})
 }
 
-var p *tea.Program
+var (
+	p    *tea.Program
+	quit chan struct{}
+)
 
 // Start inicia a barra de progresso
 func Start() {
-	p = tea.NewProgram(model{quit: make(chan struct{})})
+	quit = make(chan struct{})
+	p = tea.NewProgram(model{quit: quit})
 	go func() {
 		if _, err := p.Run(); err != nil {
 			fmt.Println("Erro ao iniciar a barra de progresso:", err)
@@ -70,8 +74,10 @@ func Start() {
 
 // Stop finaliza a barra de progresso
 func Stop() {
+	if quit != nil {
+		close(quit)
+	}
 	if p != nil {
-		close(p.Model().(model).quit)
 		p.Quit()
 	}
 }
