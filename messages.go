@@ -1,6 +1,8 @@
 package r2d2Styles
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Function to generate an info message
 func InfoMessage(message string) string {
@@ -10,6 +12,10 @@ func InfoMessage(message string) string {
 // Function to generate a warning message
 func WarningMessage(message string) string {
 	return fmt.Sprintf("%s %s", Tag("warning"), message)
+}
+
+func Bold(message string) string {
+	return boldStyle.Render(message)
 }
 
 // Function to generate an error message
