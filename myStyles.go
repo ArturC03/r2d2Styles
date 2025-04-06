@@ -4,6 +4,10 @@ import "github.com/charmbracelet/lipgloss"
 
 // Tag styles
 var (
+	boldStyle = lipgloss.NewStyle().
+			Bold(true).
+			Foreground(lipgloss.Color("#FFFFFF"))
+
 	errorStyle = lipgloss.NewStyle().
 			Bold(true).
 			Background(lipgloss.Color("#FF4F5A")).
