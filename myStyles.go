@@ -2,37 +2,7 @@ package r2d2Styles
 
 import "github.com/charmbracelet/lipgloss"
 
-// Tag styles
-var (
-	boldStyle = lipgloss.NewStyle().
-			Bold(true)
-
-	errorStyle = lipgloss.NewStyle().
-			Bold(true).
-			Background(lipgloss.Color("#FF4F5A")).
-			Foreground(lipgloss.Color("#FFFFFF")).
-			Padding(0, 1)
-
-	infoStyle = lipgloss.NewStyle().
-			Bold(true).
-			Background(lipgloss.Color("#4C6EF5")).
-			Foreground(lipgloss.Color("#FFFFFF")).
-			Padding(0, 1)
-
-	warningStyle = lipgloss.NewStyle().
-			Bold(true).
-			Background(lipgloss.Color("#FFB92D")).
-			Foreground(lipgloss.Color("#FFFFFF")).
-			Padding(0, 1)
-
-	successStyle = lipgloss.NewStyle().
-			Bold(true).
-			Background(lipgloss.Color("#28A745")). // Verde forte para sucesso
-			Foreground(lipgloss.Color("#FFFFFF")).
-			Padding(0, 1)
-)
-
-// Colors
+// Colors - Todas as cores agora são adaptáveis
 var (
 	subtle     = lipgloss.AdaptiveColor{Light: "#B0B7C3", Dark: "#6E6E6E"} // More subtle, neutral
 	highlight  = lipgloss.AdaptiveColor{Light: "#7F66FF", Dark: "#9D7EFF"} // Lighter purple, great contrast
@@ -43,9 +13,47 @@ var (
 	accent     = lipgloss.AdaptiveColor{Light: "#FF5733", Dark: "#FF6B6B"} // Vibrant orange
 	background = lipgloss.AdaptiveColor{Light: "#F0F4F8", Dark: "#2E2E2E"} // Soft light and dark background
 	success    = lipgloss.AdaptiveColor{Light: "#28A745", Dark: "#218838"} // Verde adaptável
+
+	// Cores adicionais para text readability
+	primaryText   = lipgloss.AdaptiveColor{Light: "#000000", Dark: "#FFFFFF"} // Texto principal
+	secondaryText = lipgloss.AdaptiveColor{Light: "#666666", Dark: "#CCCCCC"} // Texto secundário
+	invertedText  = lipgloss.AdaptiveColor{Light: "#FFFFFF", Dark: "#000000"} // Texto invertido para backgrounds coloridos
+	selectedBg    = lipgloss.AdaptiveColor{Light: "#E8E8E8", Dark: "#3A3A3A"} // Background para itens selecionados
+	itemText      = lipgloss.AdaptiveColor{Light: "#555555", Dark: "#AAAAAA"} // Texto para itens normais
 )
 
-// Help menu styles
+// Tag styles - Agora totalmente responsivos
+var (
+	boldStyle = lipgloss.NewStyle().
+			Bold(true).
+			Foreground(primaryText)
+
+	errorStyle = lipgloss.NewStyle().
+			Bold(true).
+			Background(errorColor).
+			Foreground(invertedText).
+			Padding(0, 1)
+
+	infoStyle = lipgloss.NewStyle().
+			Bold(true).
+			Background(info).
+			Foreground(invertedText).
+			Padding(0, 1)
+
+	warningStyle = lipgloss.NewStyle().
+			Bold(true).
+			Background(warning).
+			Foreground(invertedText).
+			Padding(0, 1)
+
+	successStyle = lipgloss.NewStyle().
+			Bold(true).
+			Background(success).
+			Foreground(invertedText).
+			Padding(0, 1)
+)
+
+// Help menu styles - Totalmente responsivos
 var (
 	baseStyle = lipgloss.NewStyle().
 			BorderStyle(lipgloss.RoundedBorder()).
@@ -61,14 +69,14 @@ var (
 
 	itemStyle = lipgloss.NewStyle().
 			PaddingLeft(4).
-			Foreground(lipgloss.Color("241")).
+			Foreground(itemText).
 			Italic(true)
 
 	selectedItemStyle = lipgloss.NewStyle().
 				PaddingLeft(2).
 				Foreground(special).
 				Bold(true).
-				Background(lipgloss.Color("235"))
+				Background(selectedBg)
 
 	messageStyle = lipgloss.NewStyle().
 			Italic(true).
@@ -83,6 +91,7 @@ var (
 			Bold(true)
 )
 
+// Função Tag mantém-se igual
 func Tag(tagType string) string {
 	switch tagType {
 	case "error":
@@ -96,4 +105,49 @@ func Tag(tagType string) string {
 	default:
 		return ""
 	}
+}
+
+// Funções auxiliares para acesso direto aos estilos
+func GetBoldStyle() lipgloss.Style {
+	return boldStyle
+}
+
+func GetErrorStyle() lipgloss.Style {
+	return errorStyle
+}
+
+func GetInfoStyle() lipgloss.Style {
+	return infoStyle
+}
+
+func GetWarningStyle() lipgloss.Style {
+	return warningStyle
+}
+
+func GetSuccessStyle() lipgloss.Style {
+	return successStyle
+}
+
+func GetBaseStyle() lipgloss.Style {
+	return baseStyle
+}
+
+func GetTitleStyle() lipgloss.Style {
+	return titleStyle
+}
+
+func GetItemStyle() lipgloss.Style {
+	return itemStyle
+}
+
+func GetSelectedItemStyle() lipgloss.Style {
+	return selectedItemStyle
+}
+
+func GetMessageStyle() lipgloss.Style {
+	return messageStyle
+}
+
+func GetInfoItemStyle() lipgloss.Style {
+	return infoItemStyle
 }
