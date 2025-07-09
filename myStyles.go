@@ -26,30 +26,30 @@ var (
 var (
 	boldStyle = lipgloss.NewStyle().
 			Bold(true).
-			Foreground(primaryText)
+			Foreground(highlight)
 
 	errorStyle = lipgloss.NewStyle().
 			Bold(true).
 			Background(errorColor).
-			Foreground(invertedText).
+			Foreground(primaryText).
 			Padding(0, 1)
 
 	infoStyle = lipgloss.NewStyle().
 			Bold(true).
 			Background(info).
-			Foreground(invertedText).
+			Foreground(primaryText).
 			Padding(0, 1)
 
 	warningStyle = lipgloss.NewStyle().
 			Bold(true).
 			Background(warning).
-			Foreground(invertedText).
+			Foreground(primaryText).
 			Padding(0, 1)
 
 	successStyle = lipgloss.NewStyle().
 			Bold(true).
 			Background(success).
-			Foreground(invertedText).
+			Foreground(primaryText).
 			Padding(0, 1)
 )
 
